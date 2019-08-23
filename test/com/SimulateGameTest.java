@@ -1,8 +1,8 @@
 package com;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SimulateGameTest {
 	
@@ -15,7 +15,7 @@ public class SimulateGameTest {
 		SimulateGame instance = new SimulateGame();
 		Player winner = instance.get1v1Winner(xqc, jns);
 		
-		assertEquals("xqc should win the 1v1", winner, xqc);
+		assertEquals(winner, xqc);
 	}
 	
 	@Test
@@ -27,7 +27,7 @@ public class SimulateGameTest {
 		SimulateGame instance = new SimulateGame();
 		Player winner = instance.get1v1Winner(jns, xqc);
 		
-		assertEquals("xqc should win the 1v1", winner, xqc);
+		assertEquals(winner, xqc);
 	}
 	
 }
