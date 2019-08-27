@@ -16,6 +16,7 @@ public class SimulateGameTest {
 		Player winner = instance.get1v1Winner(xqc, jns);
 		
 		assertEquals(winner, xqc);
+		// Added a comment
 	}
 	
 	@Test
