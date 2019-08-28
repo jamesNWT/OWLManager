@@ -16,18 +16,6 @@ public class SimulateGame {
 	
 	public void simulateTeamFight(AttackingTeam attackers, DefendingTeam defenders) {
 		
-		
-		skirmishPhase(attackers, defenders);
-		
-		fightPhase(attackers, defenders);
-		
-	}
-
-	private void fightPhase(AttackingTeam attackers, DefendingTeam defenders) {
-	}
-
-	private void skirmishPhase(Team attackers, Team defenders) {
-		
 	}
 
 }
