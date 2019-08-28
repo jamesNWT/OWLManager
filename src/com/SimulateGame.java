@@ -1,5 +1,7 @@
 package com;
 
+import jdk.jfr.StackTrace;
+
 public class SimulateGame {
 	
 	private Team team1;
@@ -14,8 +16,10 @@ public class SimulateGame {
 		}
 	}
 	
-	public void simulateTeamFight(AttackingTeam attackers, DefendingTeam defenders) {
-		
+	private void simulateTeamFight() {
+		int team1roll = Dice.rollOneToHundred() + team1.avgAllTeamStats();
+		int team2roll = Dice.rollOneToHundred() + team2.avgAllTeamStats();
+
 	}
 
 }

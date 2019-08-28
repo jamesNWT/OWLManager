@@ -12,12 +12,18 @@ public class Player {
 		this.baseSkills = skills;
 	}
 
+	public Player() {}
+
 	public BaseSkills getBaseSkills() {
 		return baseSkills;
 	}
 	
 	public String getTag() {
 		return tag;
+	}
+
+	public int avgAllPlayerStats() {
+		return baseSkills.sumSkills() / baseSkills.getNumSkills();
 	}
 
 }

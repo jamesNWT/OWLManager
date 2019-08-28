@@ -8,7 +8,7 @@ public class Team {
     private String name;
 
     private int cohesionRating;
-    private int tactics;
+    private int tacticsRating;
 
     private PlayerInGame[] players = new PlayerInGame[6];
 
@@ -19,11 +19,11 @@ public class Team {
     }
 
     public int getTactics() {
-        return tactics;
+        return tacticsRating;
     }
 
     public void setTactics(int tactics) {
-        this.tactics = tactics;
+        this.tacticsRating = tactics;
     }
 
     public int getCohesionRating() {
@@ -40,5 +40,14 @@ public class Team {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int avgAllTeamStats() {
+        int result = 0;
+        for (PlayerInGame player : players) {
+            result += player.avgAllPlayerStats();
+        }
+        result += ((cohesionRating + tacticsRating) / 2);
+        return result;
     }
 }
