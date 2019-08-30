@@ -1,6 +1,7 @@
-package com;
+package simulation;
 
-import jdk.jfr.StackTrace;
+import com.Player;
+import com.Team;
 
 public class SimulateGame {
 	
@@ -14,12 +15,6 @@ public class SimulateGame {
 		} else {
 			return player2;
 		}
-	}
-	
-	private void simulateTeamFight() {
-		int team1roll = Dice.rollOneToHundred() + team1.avgAllTeamStats();
-		int team2roll = Dice.rollOneToHundred() + team2.avgAllTeamStats();
-
 	}
 
 }

@@ -1,6 +1,7 @@
 package com;
 
 import org.junit.jupiter.api.Test;
+import simulation.SimulateGame;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

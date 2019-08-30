@@ -1,4 +1,4 @@
-package com;
+package simulation;
 
 public class GameClock {
 
