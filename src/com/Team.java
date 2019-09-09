@@ -10,9 +10,23 @@ public class Team {
     private int cohesionRating;
     private int tacticsRating;
 
+    public int getTempRating() {
+        return tempRating;
+    }
+
+    public void setTempRating(int tempRating) {
+        this.tempRating = tempRating;
+    }
+
+    private int tempRating;
+
     private PlayerInGame[] players = new PlayerInGame[6];
 
-    public Team(){};
+    public Team(){}
+
+    public Team(int tempRating) {
+        this.tempRating = tempRating;
+    }
 
     public void setPlayers( PlayerInGame[] players) {
         this.players = players;

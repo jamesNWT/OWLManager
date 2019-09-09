@@ -5,8 +5,7 @@ public class Simulate2CPGame {
     private TeamIn2CPGame team1 = new TeamIn2CPGame();
     private TeamIn2CPGame team2 = new TeamIn2CPGame();
 
-    private int team1Score = 0;
-    private int team2Score = 0;
+    private int clockTime = 240;
 
     private int pointACaptureProgress;
     private int pointBCaptureProgress;
@@ -28,7 +27,12 @@ public class Simulate2CPGame {
             while (attackers.getTime() > 0 && pointBCaptureProgress < 100) {
 
                 if (pointACaptureProgress < 100) {
-                    // attack point A
+                    int result = attackPointA(attackers, defenders);
+
+                    if (result > 0) {
+                        pointACaptureProgress = 100;
+                        attackers.incrementScore();
+                    }
                 } else {
                     // attack point B
                 }
@@ -44,6 +48,19 @@ public class Simulate2CPGame {
                         attackers.getScore());
             }
         }
+    }
+
+    public int attackPointA(TeamIn2CPGame attackers, TeamIn2CPGame defenders) {
+        // The more positive this number is the more heavily the attackers won the fight.
+        int result = attackers.getTempRating() + RNG.normallyDistributedOneToOneHundred()
+                - (defenders.getTempRating() + RNG.normallyDistributedOneToOneHundred());
+
+        return result;
+    }
+
+    // The bigger the result the more decisively it was won, so less time is taken
+    public int fightTime(int result) {
+        return 0;
     }
 
 }
