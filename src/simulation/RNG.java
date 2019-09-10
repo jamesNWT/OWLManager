@@ -16,7 +16,7 @@ public class RNG {
     public static int normallyDistributedOneToOneHundred(){
         java.util.Random rand = new java.util.Random();
 
-        Double rgn =  (rand.nextGaussian()*20)+50.5;
+        Double rgn =  (rand.nextGaussian()*19)+50.5;
         int rgnInt = rgn.intValue();
 
         if (rgnInt > 100) {rgnInt = 100;} else if (rgnInt < 0) {rgnInt = 0;}

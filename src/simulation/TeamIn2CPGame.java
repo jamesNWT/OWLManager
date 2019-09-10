@@ -6,6 +6,16 @@ public class TeamIn2CPGame extends Team {
     private int time = 4*60; // 4 minutes
     private int score = 0;
 
+    public double getMaxPointBCaptureProgress() {
+        return maxPointBCaptureProgress;
+    }
+
+    public void setMaxPointBCaptureProgress(double maxPointBCaptureProgress) {
+        this.maxPointBCaptureProgress = maxPointBCaptureProgress;
+    }
+
+    public double maxPointBCaptureProgress = 33.3;
+
     public int getTime() {
         return time;
     }
