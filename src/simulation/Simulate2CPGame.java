@@ -7,10 +7,11 @@ public class Simulate2CPGame {
     private TeamIn2CPGame team1 = new TeamIn2CPGame();
     private TeamIn2CPGame team2 = new TeamIn2CPGame();
 
-    private int clockTime = 240;
 
     private double pointACaptureProgress;
     private double pointBCaptureProgress;
+
+    int roundNumber = 0;
 
     public void playGame(TeamIn2CPGame team1, TeamIn2CPGame team2) {
 
@@ -22,7 +23,8 @@ public class Simulate2CPGame {
 
         while (!gameOver) {
 
-            System.out.println(attackers.getName() + " is attacking.");
+            roundNumber++;
+            System.out.println("Round " + roundNumber + ": " + attackers.getName() + " is attacking with " + clockTimeMinutesSeconds(attackers.getTime()));
 
             //Play the round
             while (attackers.getTime() > 0 && pointBCaptureProgress < pointBThresholdToCapture) {
@@ -45,6 +47,9 @@ public class Simulate2CPGame {
                             System.out.println(attackers.getName() + " captured point A in overtime!");
                             attackers.setTime(180);
                         }
+                        if (attackers.getScore() > defenders.getScore() && roundNumber%2 == 0) {
+                            break;
+                        }
                     }
                 } else {
 
@@ -52,6 +57,10 @@ public class Simulate2CPGame {
                     int timeTaken = fightTime(result);
                     attackers.setTime(attackers.getTime() - timeTaken);
                     pointBCaptureProgress = calculatePointBCaptureProgress(result, pointBCaptureProgress);
+
+                    if (pointBCaptureProgress > attackers.getMaxPointBCaptureProgress()) {
+                        attackers.setMaxPointBCaptureProgress(pointBCaptureProgress);
+                    }
 
                     if(pointBCaptureProgress >= pointBThresholdToCapture && attackers.getTime() > 0) {
 
@@ -64,10 +73,6 @@ public class Simulate2CPGame {
                         System.out.println(attackers.getName() + " captured point B in overtime!");
                         attackers.setTime(0);
                     } else if (pointBCaptureProgress < pointBThresholdToCapture) {
-
-                        if (pointBCaptureProgress > attackers.getMaxPointBCaptureProgress()) {
-                            attackers.setMaxPointBCaptureProgress(pointBCaptureProgress);
-                        }
 
                         if (pointBCaptureProgress > 66.7) {
 
@@ -85,15 +90,27 @@ public class Simulate2CPGame {
             if (attackers.getTime() < 0) {
                 attackers.setTime(0);
             }
-            System.out.println("-------------------------------");
+            System.out.println("----- Score: " + team1.getScore() + " / " +team2.getScore() + " ----");
 
             // Check for a winner
-            if (defenders.getTime() <= 0 && attackers.getScore() > defenders.getScore()) {
+            if (roundNumber%2 == 0 && attackers.getScore() > defenders.getScore()) {
                 gameOver = true;
                 System.out.println(attackers.getName() + " wins by a score of " + attackers.getScore() + " to " +
                         defenders.getScore());
             } else if (defenders.getScore() > attackers.getScore()) {
                 gameOver = true;
+                System.out.println(defenders.getName() + " wins by a score of " + defenders.getScore() + " to " +
+                        attackers.getScore());
+            } else if ( roundNumber%2 == 0
+                    && attackers.getScore() == defenders.getScore()
+                    && isExtraRounds()
+                    && attackers.getMaxPointBCaptureProgress() < pointBThresholdToCapture
+                    && pointBThresholdToCapture > 33.3)
+            {
+                System.out.println(attackers.getName() + " needed to capture " + pointBThresholdToCapture
+                        + "% of point B, but only captured " + attackers.getMaxPointBCaptureProgress() + "%!");
+                gameOver = true;
+                defenders.incrementScore();
                 System.out.println(defenders.getName() + " wins by a score of " + defenders.getScore() + " to " +
                         attackers.getScore());
             }
@@ -179,6 +196,10 @@ public class Simulate2CPGame {
          int minutes = clockTime/60;
          int seconds = clockTime%60;
          return minutes + ":" + seconds;
+    }
+
+    private boolean isExtraRounds() {
+        return roundNumber > 2;
     }
 
 }
