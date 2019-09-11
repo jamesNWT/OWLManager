@@ -26,6 +26,13 @@ public class Simulate2CPGame {
             roundNumber++;
             System.out.println("Round " + roundNumber + ": " + attackers.getName() + " is attacking with " + clockTimeMinutesSeconds(attackers.getTime()));
 
+            if (pointBThresholdToCapture < 100 && pointACaptureProgress >= 100) {
+                System.out.println(attackers.getName() + " can win if they capture " + pointBThresholdToCapture + "% of point B");
+            }
+
+            pointACaptureProgress = 0;
+            pointBCaptureProgress = 0;
+
             //Play the round
             while (attackers.getTime() > 0 && pointBCaptureProgress < pointBThresholdToCapture) {
 
@@ -134,9 +141,6 @@ public class Simulate2CPGame {
             TeamIn2CPGame temp = attackers;
             attackers = defenders;
             defenders = temp;
-
-            pointACaptureProgress = 0;
-            pointBCaptureProgress = 0;
 
             attackers.setMaxPointBCaptureProgress(33.3);
             defenders.setMaxPointBCaptureProgress(33.3);
